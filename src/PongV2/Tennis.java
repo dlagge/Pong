@@ -12,10 +12,11 @@ public class Tennis extends Applet implements Runnable, KeyListener {
 	HumanPaddle p1;
 	AIPaddle p2;
 	Ball b1;
+	boolean gameStarted;
 	
 	public void init(){
 		this.resize(WIDTH, HEIGHT);
-		
+		gameStarted = false;
 		this.addKeyListener(this);
 		p1 = new HumanPaddle(1);
 		
@@ -39,6 +40,12 @@ public class Tennis extends Applet implements Runnable, KeyListener {
 			b1.draw(g);
 			p2.draw(g);
 		}
+		
+		if(!gameStarted){
+			g.setColor(Color.WHITE);
+			g.drawString("Tennis", 340, 100);
+			g.drawString("Press Enter to Begin..", 310, 130);
+		}
 	}
 	
 	public void update(Graphics g) {
@@ -48,11 +55,13 @@ public class Tennis extends Applet implements Runnable, KeyListener {
 
 	public void run() {
 		for(;;){ // unendliche Schleife
-			
-			p1.move();
-			p2.move();
-			b1.move();
-			b1.checkPaddleCollision(p1, p2);
+			if (gameStarted){
+				
+				p1.move();
+				p2.move();
+				b1.move();
+				b1.checkPaddleCollision(p1, p2);
+			}
 			
 			repaint();
 			try {
@@ -72,6 +81,8 @@ public class Tennis extends Applet implements Runnable, KeyListener {
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_DOWN){
 			p1.setDownAccel(true);
+		} else if(e.getKeyCode() == KeyEvent.VK_ENTER){
+			gameStarted = true;
 		}
 	}
 
