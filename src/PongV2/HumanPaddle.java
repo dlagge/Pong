@@ -33,6 +33,12 @@ public class HumanPaddle implements Paddle{
 		else if(!upAccel && !downAccel){
 			yVel *= GRAVITY;
 		}
+		
+		if(yVel >= 5)
+			yVel = 5;
+		else if(yVel <= -5)
+			yVel = -5;
+		
 		y += yVel;
 	}
 	
