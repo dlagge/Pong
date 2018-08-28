@@ -40,6 +40,11 @@ public class HumanPaddle implements Paddle{
 			yVel = -5;
 		
 		y += yVel;
+		
+		if(y < 0)
+			y = 0;
+		if(y > 420)
+			y = 420;
 	}
 	
 	public void setUpAccel(boolean input){
