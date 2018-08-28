@@ -3,6 +3,7 @@ package PongV2;
 import java.applet.Applet;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -13,15 +14,18 @@ public class Tennis extends Applet implements Runnable, KeyListener {
 	AIPaddle p2;
 	Ball b1;
 	boolean gameStarted;
+	Graphics gfx;
+	Image img;
 	
 	public void init(){
 		this.resize(WIDTH, HEIGHT);
 		gameStarted = false;
 		this.addKeyListener(this);
 		p1 = new HumanPaddle(1);
-		
 		b1 = new Ball();
 		p2 = new AIPaddle(2, b1);
+		img = createImage(WIDTH, HEIGHT);
+		gfx = img.getGraphics();
 		thread = new Thread(this);
 		thread.start();
 	}
@@ -29,23 +33,24 @@ public class Tennis extends Applet implements Runnable, KeyListener {
 	public void paint(Graphics g){
 		
 		
-		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, WIDTH, HEIGHT);
+		gfx.setColor(Color.BLACK);
+		gfx.fillRect(0, 0, WIDTH, HEIGHT);
 		if(b1.getX() < -10 || b1.getX() > 710){
-			g.setColor(Color.RED);
-			g.drawString("Game Over", 350, 250);
+			gfx.setColor(Color.RED);
+			gfx.drawString("Game Over", 350, 250);
 		}
 		else{
-			p1.draw(g);
-			b1.draw(g);
-			p2.draw(g);
+			p1.draw(gfx);
+			b1.draw(gfx);
+			p2.draw(gfx);
 		}
 		
 		if(!gameStarted){
-			g.setColor(Color.WHITE);
-			g.drawString("Tennis", 340, 100);
-			g.drawString("Press Enter to Begin..", 310, 130);
+			gfx.setColor(Color.WHITE);
+			gfx.drawString("Tennis", 340, 100);
+			gfx.drawString("Press Enter to Begin..", 310, 130);
 		}
+		g.drawImage(img, 0, 0, this);
 	}
 	
 	public void update(Graphics g) {
