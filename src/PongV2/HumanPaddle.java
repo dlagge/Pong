@@ -7,7 +7,7 @@ public class HumanPaddle implements Paddle{
 	double y, yVel;
 	boolean upAccel, downAccel;
 	int player, x; 
-	
+	final double GRAVITY = 0.94;
 	public HumanPaddle(int player) {
 		upAccel = false; downAccel = false;
 		y = 210; yVel = 0;
@@ -24,8 +24,16 @@ public class HumanPaddle implements Paddle{
 	}
 
 	public void move() {
-		// TODO Auto-generated method stub
-		
+		if(upAccel){
+			yVel -= 2;
+		}
+		else if(downAccel){
+			yVel += 2;
+		}
+		else if(!upAccel && !downAccel){
+			yVel *= GRAVITY;
+		}
+		y += yVel;
 	}
 	
 	public void setUpAccel(boolean input){
