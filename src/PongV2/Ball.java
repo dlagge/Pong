@@ -10,7 +10,7 @@ public class Ball {
 	public Ball() {
 		x = 350;
 		y = 250;
-		xVel = 4;
+		xVel = -1;
 		yVel = 1;
 	}
 	
@@ -20,6 +20,18 @@ public class Ball {
 		g.fillOval((int)x-10, (int)y-10, 20, 20);
 	}
 	
+	public void checkPaddleCollision(Paddle p1, Paddle p2){
+		if(x <= 50){
+			if(y >= p1.getY() && y <= p1.getY() + 80){
+				xVel = -xVel;
+			}
+		}
+		else if(x >=650){
+			if(y >= p2.getY() && y <= p2.getY() + 80){
+				xVel = -xVel;
+			}
+		}
+	}
 	
 	public void move(){
 		x+= xVel;
