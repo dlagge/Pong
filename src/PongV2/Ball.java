@@ -10,7 +10,7 @@ public class Ball {
 	public Ball() {
 		x = 350;
 		y = 250;
-		xVel = -2;
+		xVel = 0;
 		yVel = 1;
 	}
 	
@@ -24,6 +24,11 @@ public class Ball {
 	public void move(){
 		x+= xVel;
 		y+= yVel;
+		
+		if(y < 10)
+			yVel = -yVel;
+		if(y > 490)
+			yVel = -yVel;
 	}
 	
 	
