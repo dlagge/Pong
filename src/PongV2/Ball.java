@@ -10,7 +10,7 @@ public class Ball {
 	public Ball() {
 		x = 350;
 		y = 250;
-		xVel = 0;
+		xVel = 4;
 		yVel = 1;
 	}
 	
